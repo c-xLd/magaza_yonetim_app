@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "733314505832",
+    "project_id": "magaza-yonetimi",
+    "storage_bucket": "magaza-yonetimi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733314505832:android:31f378bd0e0ea18f75efdd",
+        "android_client_info": {
+          "package_name": "com.example.magaza_yonetimi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_KbRHgr9r46CJPXMCM1dS76omb0y-CnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

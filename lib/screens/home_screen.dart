@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../common/sliding_panels.dart';
 import 'login_screen.dart';
+import '../widgets/upcoming_tasks_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,74 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void _showUpcomingTasksBottomSheet(BuildContext context) {
-    final List<Map<String, String>> tasks = [
-      {
-        'date': '18.08.2025',
-        'desc': 'Sayım işlemlerinin satışı bekliyor.'
-      },
-      {
-        'date': '20.08.2025',
-        'desc': 'SKT kontrolü yapılacak.'
-      },
-      {
-        'date': '22.08.2025',
-        'desc': 'Aylık envanter raporu hazırlanacak.'
-      },
-      {
-        'date': '25.08.2025',
-        'desc': 'Yönetici toplantısı.'
-      },
-    ];
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      builder: (context) {
-        final colorScheme = Theme.of(context).colorScheme;
-        final textTheme = Theme.of(context).textTheme;
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      child: Column(
-            mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.event_note, color: colorScheme.primary),
-                  const SizedBox(width: 12),
-                  Text('Yaklaşan Görevler', style: textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-                ],
-              ),
-              const SizedBox(height: 18),
-              ...tasks.take(3).map((task) => Card(
-                color: colorScheme.surfaceContainerHigh,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                elevation: 0,
-                margin: const EdgeInsets.only(bottom: 12),
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: colorScheme.primary.withOpacity(0.13),
-                    child: Icon(Icons.calendar_today, color: colorScheme.primary),
-                  ),
-                  title: Text(task['desc'] ?? '', style: textTheme.bodyLarge),
-                  subtitle: Text(task['date'] ?? '', style: textTheme.bodySmall?.copyWith(color: colorScheme.primary)),
-                ),
-              )),
-              if (tasks.length > 3)
-                Center(
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text('Tümünü Gör'),
-            ),
-          ),
-        ],
-      ),
-    );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +195,33 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ElevatedButton.icon(
                               icon: const Icon(Icons.event_note),
                               label: const Text('Yaklaşan Görevler'),
-                              onPressed: () => _showUpcomingTasksBottomSheet(context),
+                              onPressed: () {
+                                final List<Map<String, String>> tasks = [
+                                  {
+                                    'date': '18.08.2025',
+                                    'desc': 'Sayım işlemlerinin satışı bekliyor.'
+                                  },
+                                  {
+                                    'date': '20.08.2025',
+                                    'desc': 'SKT kontrolü yapılacak.'
+                                  },
+                                  {
+                                    'date': '22.08.2025',
+                                    'desc': 'Aylık envanter raporu hazırlanacak.'
+                                  },
+                                  {
+                                    'date': '25.08.2025',
+                                    'desc': 'Yönetici toplantısı.'
+                                  },
+                                ];
+                                showModalBottomSheet(
+                                  context: context,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                                  ),
+                                  builder: (context) => UpcomingTasksSheet(tasks: tasks),
+                                );
+                              },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                                 padding: const EdgeInsets.symmetric(vertical: 14),
